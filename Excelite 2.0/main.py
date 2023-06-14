@@ -19,8 +19,19 @@ import pandas as pd
 
 # Declaring global variables:
 csv_exists = ''
-image_2 = None
+image_1= None
+image_2= None
+image_3= None
+image_4= None
+image_5= None
+image_6= None
+image_7= None
+image_8= None
+
 entry_bg_1 = None
+entry_bg_2 = None
+entry_bg_3 = None
+entry_bg_4 = None
 
 # Explicit imports to satisfy Flake8
 from tkinter import (Button, Canvas, Entry, Frame, PhotoImage, Scrollbar, Text,
@@ -265,8 +276,9 @@ image_4 = canvas.create_image(
 
 
 # this is the UI code
+# this is the UI code
 def callin():
-    global entry_3, image_2, entry_4, entry_bg_1
+    global entry_3, image_2, entry_4, entry_bg_1, image_5, image_6, image_4, entry_bg_2, entry_bg_4
     canvas = Canvas(
         window,
         bg="#222831",
@@ -279,12 +291,13 @@ def callin():
 
     canvas.place(x=0, y=0)
     image_image_6 = PhotoImage(
-        file=relative_to_assets("image_1.png"))
+        file=relative_to_assets("image_6.png"))
     image_6 = canvas.create_image(
         258.0,
         332.0,
         image=image_image_6
     )
+    print(image_5)
 
     canvas.create_text(
         54.0,
@@ -313,13 +326,13 @@ def callin():
         font=("Poppins Regular", 12 * -1)
     )
 
-    image_image_2 = PhotoImage(
-        file=relative_to_assets("image_2.png"))
-    image_2 = canvas.create_image(
-        151.0,
-        69.0,
-        image=image_image_2
-    )
+    # image_image_2 = PhotoImage(
+    #     file=relative_to_assets("image_2.png"))
+    # image_2 = canvas.create_image(
+    #     151.0,
+    #     69.0,
+    #     image=image_image_2
+    # )
 
     image_image_4 = PhotoImage(
         file=relative_to_assets("image_4.png"))
@@ -330,7 +343,7 @@ def callin():
     )
 
     image_image_5 = PhotoImage(
-        file=relative_to_assets("image_3.png"))
+        file=relative_to_assets("image_5.png"))
     image_5 = canvas.create_image(
         695.0,
         93.0,
@@ -377,19 +390,18 @@ def callin():
         height=86.0
     )
 
-    entry_3 = Entry(
-        bd=0,
-        bg="#D9D9D9",
-        fg="#000716",
-        highlightthickness=0
-    )
+    # entry_3 = Entry(
+    #     bd=0,
+    #     bg="#D9D9D9",
+    #     fg="#000716",
+    #     highlightthickness=0
+    # )
     # entry_3.place(
-    #                 x=34.0,
-    #                 y=126.0,
-    #                 width=440.0,
-    #                 height=438.0
-    #             )
-    entry_3.pack()
+    #     x=34.0,
+    #     y=126.0,
+    #     width=440.0,
+    #     height=438.0
+    # )
     canvas.create_text(
         580.0,
         146.0,
@@ -409,7 +421,7 @@ def callin():
     )
 
     entry_image_4 = PhotoImage(
-        file=relative_to_assets("entry_3.png"))
+        file=relative_to_assets("entry_4.png"))
     entry_bg_4 = canvas.create_image(
         806.0,
         397.0,
@@ -437,21 +449,6 @@ def callin():
         font=("Poppins Regular", 16 * -1)
     )
 
-    # Alert starts:
-    # print_button = Button(
-    #     window,
-    #     text="Print",
-    #     command=print_text,
-    #     font=("Poppins Regular", 12),
-    #     bg="#393E46",
-    #     fg="#FFFFFF",
-    #     activebackground="#00ADB5",
-    #     activeforeground="#FFFFFF",
-    #     relief="flat"
-    # )
-    # print_button.place(x=10, y=80)
-    # Alert ends
-
 
     image_image_7 = PhotoImage(
         file=relative_to_assets("image_7.png"))
@@ -468,7 +465,8 @@ def callin():
         601.0,
         image=image_image_8
     )
-
+    window.resizable(False, False)
+    window.mainloop()
 
 window.resizable(False, False)
 window.mainloop()
