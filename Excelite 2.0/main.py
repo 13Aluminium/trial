@@ -38,7 +38,7 @@ from tkinter import (Button, Canvas, Entry, Frame, PhotoImage, Scrollbar, Text,
                      Tk, filedialog, font, messagebox)
 
 OUTPUT_PATH = Path(__file__).parent
-ASSETS_PATH = OUTPUT_PATH / Path(r"assets\frame0")
+ASSETS_PATH = OUTPUT_PATH / Path(r"assets/frame0")
 
 
 # ==================================================================================================================== #
@@ -79,9 +79,9 @@ def open_excel_file():
             print(csv_data)
             df = pd.read_csv(io.StringIO(csv_data))
             # this is ther code to call the second page UI
-            callin()
+
+            callin(df)
             # Create the table frame
-            display_table(df)
         else:
             print("Failed to convert to CSV.")
     else:
@@ -153,7 +153,7 @@ window.configure(bg="#222831")
 #  Aa code too phela mathi bani ne aaviyo
 window.title("HYPERVECT | Excelite")
 # photo = PhotoImage(file="")
-window.iconbitmap("assets/frame0/favicon.bmp")
+# window.iconbitmap("assets/frame0/favicon.bmp")
 
 # this is the home page code
 
@@ -274,11 +274,10 @@ image_4 = canvas.create_image(
 # )
 # upload_button.place(x=10, y=10)
 
-
 # this is the UI code
-# this is the UI code
-def callin():
-    global entry_3, image_2, entry_4, entry_bg_1, image_5, image_6, image_4, entry_bg_2, entry_bg_4
+def callin(df):
+    df=df
+    global entry_3, image_2, entry_4, entry_bg_1, image_5, image_6, image_4, entry_bg_2, entry_bg_4,image_7,image_8
     canvas = Canvas(
         window,
         bg="#222831",
@@ -465,8 +464,13 @@ def callin():
         601.0,
         image=image_image_8
     )
+    display_table(df)
+
     window.resizable(False, False)
     window.mainloop()
+
+    
+
 
 window.resizable(False, False)
 window.mainloop()
