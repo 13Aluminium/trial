@@ -89,7 +89,7 @@ def print_text():
 # this is the code to display item
 def display_table(df):
     table_frame = Frame(window, bg="#FFFFFF")
-    table_frame.place(x=10, y=125, width=500, height=450)
+    table_frame.place(x=26, y=135, width=440, height=440)
     # Clear previous table, if any
 
     if table_frame.winfo_children():
@@ -225,8 +225,8 @@ button_image_2 = Button(
     bg="#222831",
     bd=0,
     activebackground="#222831",
-    # command=calling_function
-    # Uncommnet above line
+    command=open_excel_file
+
 )
 button_image_2.place(x=493.0, y=349.0)
 
@@ -321,6 +321,14 @@ def callin():
         image=image_image_2
     )
 
+    image_image_4 = PhotoImage(
+        file=relative_to_assets("image_4.png"))
+    image_4 = canvas.create_image(
+        151.0,
+        69.0,
+        image=image_image_4
+    )
+
     image_image_5 = PhotoImage(
         file=relative_to_assets("image_3.png"))
     image_5 = canvas.create_image(
@@ -353,7 +361,7 @@ def callin():
         file=relative_to_assets("entry_2.png"))
     entry_bg_2 = canvas.create_image(
         806.0,
-        522.0,
+        528.0,
         image=entry_image_2
     )
     entry_2 = Text(
@@ -364,10 +372,11 @@ def callin():
     )
     entry_2.place(
         x=580.0,
-        y=478.0,
+        y=484.0,
         width=452.0,
         height=86.0
     )
+
     entry_3 = Entry(
         bd=0,
         bg="#D9D9D9",
@@ -428,18 +437,37 @@ def callin():
         font=("Poppins Regular", 16 * -1)
     )
 
-    print_button = Button(
-        window,
-        text="Print",
-        command=print_text,
-        font=("Poppins Regular", 12),
-        bg="#393E46",
-        fg="#FFFFFF",
-        activebackground="#00ADB5",
-        activeforeground="#FFFFFF",
-        relief="flat"
+    # Alert starts:
+    # print_button = Button(
+    #     window,
+    #     text="Print",
+    #     command=print_text,
+    #     font=("Poppins Regular", 12),
+    #     bg="#393E46",
+    #     fg="#FFFFFF",
+    #     activebackground="#00ADB5",
+    #     activeforeground="#FFFFFF",
+    #     relief="flat"
+    # )
+    # print_button.place(x=10, y=80)
+    # Alert ends
+
+
+    image_image_7 = PhotoImage(
+        file=relative_to_assets("image_7.png"))
+    image_7 = canvas.create_image(
+        977.0,
+        445.0,
+        image=image_image_7
     )
-    print_button.place(x=10, y=80)
+
+    image_image_8 = PhotoImage(
+        file=relative_to_assets("image_8.png"))
+    image_8 = canvas.create_image(
+        982.0,
+        601.0,
+        image=image_image_8
+    )
 
 
 window.resizable(False, False)
