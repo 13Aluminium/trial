@@ -22,7 +22,6 @@ csv_exists = ''
 image_2 = None
 entry_bg_1 = None
 
-
 # Explicit imports to satisfy Flake8
 from tkinter import (Button, Canvas, Entry, Frame, PhotoImage, Scrollbar, Text,
                      Tk, filedialog, font, messagebox)
@@ -36,11 +35,8 @@ ASSETS_PATH = OUTPUT_PATH / Path(r"assets\frame0")
 # ====================================# Function declaration and definition #==================== #
 
 
-
 def relative_to_assets(path: str) -> Path:
     return ASSETS_PATH / Path(path)
-
-
 
 
 # Function to convert Excel file to CSV data
@@ -58,12 +54,8 @@ def convert_to_csv(filepath):
         return None
 
 
-
-
-
 # Function to handle file selection and conversion
 def open_excel_file():
-
     global entry_3
     filetypes = [('Excel Files', '*.xlsx *.xls')]
     filepath = filedialog.askopenfilename(filetypes=filetypes)
@@ -72,13 +64,13 @@ def open_excel_file():
         # Convert Excel file to CSV data
         csv_data = convert_to_csv(filepath)
         if csv_data:
-                print("Converted CSV data:")
-                print(csv_data)
-                df = pd.read_csv(io.StringIO(csv_data))
-                #this is ther code to call the second page UI
-                callin()
-                # Create the table frame
-                display_table(df)
+            print("Converted CSV data:")
+            print(csv_data)
+            df = pd.read_csv(io.StringIO(csv_data))
+            # this is ther code to call the second page UI
+            callin()
+            # Create the table frame
+            display_table(df)
         else:
             print("Failed to convert to CSV.")
     else:
@@ -86,11 +78,7 @@ def open_excel_file():
         messagebox.showerror("Error", "No file selected")
 
 
-
-
-
-
-#this will be used in the API
+# this will be used in the API
 def print_text():
     global entry_4  # Use the global entry_3 variable
     text = entry_4.get()
@@ -98,17 +86,11 @@ def print_text():
     print("Text:", text)
 
 
-
-
-
-
-#this is the code to display item
+# this is the code to display item
 def display_table(df):
     table_frame = Frame(window, bg="#FFFFFF")
     table_frame.place(x=10, y=125, width=500, height=450)
     # Clear previous table, if any
-
-
 
     if table_frame.winfo_children():
         for child in table_frame.winfo_children():
@@ -116,8 +98,6 @@ def display_table(df):
 
     # Create a Treeview widget
     table = Treeview(table_frame)
-
-
 
     # Create a horizontal scrollbar
     x_scrollbar = Scrollbar(table_frame, orient="horizontal")
@@ -143,18 +123,13 @@ def display_table(df):
     # Insert data rows
     for i, row in df.iterrows():
         values = row.values.tolist()
-        table.insert("", "end", values=values, iid=i+1)  # Update the line
+        table.insert("", "end", values=values, iid=i + 1)  # Update the line
 
     # Display the table
     table.pack(side="left", fill="both", expand=True)
 
 
-
-
-
-
-
-# ===================================================================================================================== #
+# ==================================================================================================================== #
 
 
 # =============# # Below code is about the GUI and where the components should be placed #===================== #
@@ -162,149 +137,243 @@ def display_table(df):
 window = Tk()
 
 window.geometry("1080x665")
-window.configure(bg = "#222831")
-
+window.configure(bg="#222831")
 
 #  Aa code too phela mathi bani ne aaviyo
 window.title("HYPERVECT | Excelite")
 # photo = PhotoImage(file="")
-# window.iconbitmap("/assets/frame0/favicon.bmp")
+window.iconbitmap("assets/frame0/favicon.bmp")
 
+# this is the home page code
 
+# Alert starts:
 
-
-
-#this is the home page code
-upload_button = Button(
+canvas = Canvas(
     window,
-    text="Upload Excel File",
-    command=open_excel_file,
-    font=("Poppins Regular", 12),
-    bg="#393E46",
-    fg="#FFFFFF",
-    activebackground="#00ADB5",
-    activeforeground="#FFFFFF",
-    relief="flat"
+    bg="#222831",
+    height=665,
+    width=1080,
+    bd=0,
+    highlightthickness=0,
+    relief="ridge"
 )
-upload_button.place(x=10, y=10)
+
+canvas.place(x=0, y=0)
+image_image_1 = PhotoImage(
+    file=relative_to_assets("image_1.png"))
+image_1 = canvas.create_image(
+    151.0,
+    332.0,
+    image=image_image_1
+)
+
+text1 = canvas.create_text(
+    535.0,
+    276.0,
+    anchor="nw",
+    text="Analyze your Excel file with the help of Excelite",
+    fill="#FFFFFF",
+    font=("Poppins Regular", 15 * -1)
+)
+
+text2 = canvas.create_text(
+    561.0,
+    301.0,
+    anchor="nw",
+    text="Just drop your files below!",
+    fill="#FFFFFF",
+    font=("Poppins Regular", 20 * -1)
+)
+
+canvas.create_text(
+    54.0,
+    611.0,
+    anchor="nw",
+    text="Copyright \n©2023 HYPERVECT PVT. LTD",
+    fill="#FFFFFF",
+    font=("Poppins Regular", 12 * -1)
+)
 
 
+canvas.create_text(
+    899.0,
+    629.0,
+    anchor="nw",
+    text="About Us",
+    fill="#FFFFFF",
+    font=("Poppins Regular", 12 * -1),
+    underline=True
+)
+
+# canvas.tag_bind(canvas.create_text, "<Button-1>", lambda event: open_about_us())
 
 
+canvas.create_text(
+    977.0,
+    629.0,
+    anchor="nw",
+    text="Contact Us",
+    fill="#FFFFFF",
+    font=("Poppins Regular", 12 * -1),
+    underline=True
+)
 
+image_image_2 = PhotoImage(file=relative_to_assets("image_2.png"))
+button_image_2 = Button(
+    window,
+    image=image_image_2,
+    bg="#222831",
+    bd=0,
+    activebackground="#222831",
+    # command=calling_function
+    # Uncommnet above line
+)
+button_image_2.place(x=493.0, y=349.0)
 
+image_image_3 = PhotoImage(
+    file=relative_to_assets("image_3.png"))
+image_3 = canvas.create_image(
+    706.0,
+    65.0,
+    image=image_image_3
+)
+
+image_image_4 = PhotoImage(
+    file=relative_to_assets("image_4.png"))
+image_4 = canvas.create_image(
+    151.0,
+    69.0,
+    image=image_image_4
+)
+
+# Alert ends:
+
+# Na kamu button
+
+# upload_button = Button(
+#     window,
+#     text="Upload Excel File",
+#     command=open_excel_file,
+#     font=("Poppins Regular", 12),
+#     bg="#393E46",
+#     fg="#FFFFFF",
+#     activebackground="#00ADB5",
+#     activeforeground="#FFFFFF",
+#     relief="flat"
+# )
+# upload_button.place(x=10, y=10)
 
 
 # this is the UI code
 def callin():
     global entry_3, image_2, entry_4, entry_bg_1
     canvas = Canvas(
-                    window,
-                    bg = "#222831",
-                    height = 665,
-                    width = 1080,
-                    bd = 0,
-                    highlightthickness = 0,
-                    relief = "ridge"
-                )
+        window,
+        bg="#222831",
+        height=665,
+        width=1080,
+        bd=0,
+        highlightthickness=0,
+        relief="ridge"
+    )
 
-    canvas.place(x = 0, y = 0)
+    canvas.place(x=0, y=0)
     image_image_6 = PhotoImage(
-                    file=relative_to_assets("image_1.png"))
+        file=relative_to_assets("image_1.png"))
     image_6 = canvas.create_image(
-                    258.0,
-                    332.0,
-                    image=image_image_6
-                )
+        258.0,
+        332.0,
+        image=image_image_6
+    )
 
     canvas.create_text(
-                    54.0,
-                    611.0,
-                    anchor="nw",
-                    text="Copyright \nÂ©2023 HYPERVECT PVT. LTD",
-                    fill="#FFFFFF",
-                    font=("Poppins Regular", 12 * -1)
-                )
+        54.0,
+        611.0,
+        anchor="nw",
+        text="Copyright \nÂ©2023 HYPERVECT PVT. LTD",
+        fill="#FFFFFF",
+        font=("Poppins Regular", 12 * -1)
+    )
 
     canvas.create_text(
-                    899.0,
-                    629.0,
-                    anchor="nw",
-                    text="About Us",
-                    fill="#FFFFFF",
-                    font=("Poppins Regular", 12 * -1)
-                )
+        899.0,
+        629.0,
+        anchor="nw",
+        text="About Us",
+        fill="#FFFFFF",
+        font=("Poppins Regular", 12 * -1)
+    )
 
     canvas.create_text(
-                    977.0,
-                    629.0,
-                    anchor="nw",
-                    text="Contact Us",
-                    fill="#FFFFFF",
-                    font=("Poppins Regular", 12 * -1)
-                )
+        977.0,
+        629.0,
+        anchor="nw",
+        text="Contact Us",
+        fill="#FFFFFF",
+        font=("Poppins Regular", 12 * -1)
+    )
 
     image_image_2 = PhotoImage(
-                    file=relative_to_assets("image_2.png"))
+        file=relative_to_assets("image_2.png"))
     image_2 = canvas.create_image(
-                    151.0,
-                    69.0,
-                    image=image_image_2
-                )
+        151.0,
+        69.0,
+        image=image_image_2
+    )
 
     image_image_5 = PhotoImage(
-                    file=relative_to_assets("image_3.png"))
+        file=relative_to_assets("image_3.png"))
     image_5 = canvas.create_image(
-                    695.0,
-                    93.0,
-                    image=image_image_5
-                )
+        695.0,
+        93.0,
+        image=image_image_5
+    )
 
     entry_image_1 = PhotoImage(
-                    file=relative_to_assets("entry_1.png"))
+        file=relative_to_assets("entry_1.png"))
     entry_bg_1 = canvas.create_image(
-                    806.0,
-                    246.5,
-                    image=entry_image_1
-                )
+        806.0,
+        246.5,
+        image=entry_image_1
+    )
     entry_1 = Text(
-                    bd=0,
-                    bg="#D9D9D9",
-                    fg="#000716",
-                    highlightthickness=0
-                )
+        bd=0,
+        bg="#D9D9D9",
+        fg="#000716",
+        highlightthickness=0
+    )
     entry_1.place(
-                    x=580.0,
-                    y=181.0,
-                    width=452.0,
-                    height=129.0
-                )
+        x=580.0,
+        y=181.0,
+        width=452.0,
+        height=129.0
+    )
 
     entry_image_2 = PhotoImage(
-                    file=relative_to_assets("entry_2.png"))
+        file=relative_to_assets("entry_2.png"))
     entry_bg_2 = canvas.create_image(
-                    806.0,
-                    522.0,
-                    image=entry_image_2
-                )
+        806.0,
+        522.0,
+        image=entry_image_2
+    )
     entry_2 = Text(
-                    bd=0,
-                    bg="#D9D9D9",
-                    fg="#000716",
-                    highlightthickness=0
-                )
+        bd=0,
+        bg="#D9D9D9",
+        fg="#000716",
+        highlightthickness=0
+    )
     entry_2.place(
-                    x=580.0,
-                    y=478.0,
-                    width=452.0,
-                    height=86.0
-                )
+        x=580.0,
+        y=478.0,
+        width=452.0,
+        height=86.0
+    )
     entry_3 = Entry(
-                    bd=0,
-                    bg="#D9D9D9",
-                    fg="#000716",
-                    highlightthickness=0
-                )
+        bd=0,
+        bg="#D9D9D9",
+        fg="#000716",
+        highlightthickness=0
+    )
     # entry_3.place(
     #                 x=34.0,
     #                 y=126.0,
@@ -313,66 +382,64 @@ def callin():
     #             )
     entry_3.pack()
     canvas.create_text(
-                    580.0,
-                    146.0,
-                    anchor="nw",
-                    text="Summary\n",
-                    fill="#FFFFFF",
-                    font=("Poppins Regular", 15 * -1)
-                )
+        580.0,
+        146.0,
+        anchor="nw",
+        text="Summary\n",
+        fill="#FFFFFF",
+        font=("Poppins Regular", 15 * -1)
+    )
 
     canvas.create_text(
-                    580.0,
-                    353.0,
-                    anchor="nw",
-                    text="Ask any questions related to the excel sheet",
-                    fill="#FFFFFF",
-                    font=("Poppins Regular", 15 * -1)
-                )
+        580.0,
+        353.0,
+        anchor="nw",
+        text="Ask any questions related to the excel sheet",
+        fill="#FFFFFF",
+        font=("Poppins Regular", 15 * -1)
+    )
 
     entry_image_4 = PhotoImage(
-                    file=relative_to_assets("entry_3.png"))
+        file=relative_to_assets("entry_3.png"))
     entry_bg_4 = canvas.create_image(
-                    806.0,
-                    397.0,
-                    image=entry_image_4
-                )
+        806.0,
+        397.0,
+        image=entry_image_4
+    )
     entry_4 = Entry(
-                    bd=0,
-                    bg="#D9D9D9",
-                    fg="#000716",
-                    highlightthickness=0
-                )
+        bd=0,
+        bg="#D9D9D9",
+        fg="#000716",
+        highlightthickness=0
+    )
     entry_4.place(
-                    x=580.0,
-                    y=383.0,
-                    width=452.0,
-                    height=26.0
-                )
+        x=580.0,
+        y=383.0,
+        width=452.0,
+        height=26.0
+    )
 
     canvas.create_text(
-                    580.0,
-                    445.0,
-                    anchor="nw",
-                    text="Answer from ChatGPT",
-                    fill="#FFFFFF",
-                    font=("Poppins Regular", 16 * -1)
-                )
+        580.0,
+        445.0,
+        anchor="nw",
+        text="Answer from ChatGPT",
+        fill="#FFFFFF",
+        font=("Poppins Regular", 16 * -1)
+    )
 
     print_button = Button(
-                    window,
-                    text="Print",
-                    command=print_text,
-                    font=("Poppins Regular", 12),
-                    bg="#393E46",
-                    fg="#FFFFFF",
-                    activebackground="#00ADB5",
-                    activeforeground="#FFFFFF",
-                    relief="flat"
-                )
+        window,
+        text="Print",
+        command=print_text,
+        font=("Poppins Regular", 12),
+        bg="#393E46",
+        fg="#FFFFFF",
+        activebackground="#00ADB5",
+        activeforeground="#FFFFFF",
+        relief="flat"
+    )
     print_button.place(x=10, y=80)
-
-
 
 
 window.resizable(False, False)
