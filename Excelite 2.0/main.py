@@ -7,6 +7,7 @@
 import io
 import threading
 import time
+from tkinter import ttk
 import webbrowser
 from pathlib import Path
 
@@ -97,7 +98,7 @@ def print_text():
     print("Text:", text)
 
 
-# this is the code to display item
+# # this is the code to display item
 def display_table(df):
     table_frame = Frame(window, bg="#FFFFFF")
     table_frame.place(x=26, y=135, width=440, height=440)
@@ -107,8 +108,11 @@ def display_table(df):
         for child in table_frame.winfo_children():
             child.destroy()
 
+
+
     # Create a Treeview widget
-    table = Treeview(table_frame)
+    # table = Treeview(table_frame)
+    table = Treeview(table_frame, style="Custom.Treeview")
 
     # Create a horizontal scrollbar
     x_scrollbar = Scrollbar(table_frame, orient="horizontal")
@@ -126,8 +130,15 @@ def display_table(df):
     columns = df.columns.tolist()
     table['columns'] = columns
 
+        # Create a style for the table
+    style = ttk.Style()
+    style.configure("Custom.Treeview", background="#F0F0F0")
+    style.configure("Custom.Treeview.Heading", font=('Arial', 12, 'bold'), background="green", foreground="white")
+
+
     # Format columns
     for col in columns:
+        table.column("#0", width=0, stretch=False)  # Add this line
         table.column(col, anchor="center")
         table.heading(col, text=col)
 
@@ -138,6 +149,39 @@ def display_table(df):
 
     # Display the table
     table.pack(side="left", fill="both", expand=True)
+
+# #
+# def display_table(df):
+#     # Create the main window
+#     # window = Tk()
+#       # Create a frame to hold the table
+#     table_frame = Frame(window, bg="#FFFFFF")
+#     table_frame.place(x=26, y=135, width=440, height=440)
+
+#     # Create a Treeview widget within the frame
+#     table = ttk.Treeview(table_frame, show='headings')
+
+#     # Create a Treeview widget
+
+#     # Define columns
+#     columns = df.columns[1:].tolist()  # Exclude the first column
+#     table['columns'] = columns
+
+#     # Format columns
+#     for col in columns:
+#         table.column(col, anchor='center')
+#         table.heading(col, text=col)
+
+#     # Insert data rows
+#     for i, row in df.iterrows():
+#         values = row[1:].tolist()  # Exclude the first column value
+#         table.insert("", "end", values=values, iid=i + 1)
+
+#     # Display the table
+#     table.pack()
+
+#     # Start the main loop
+#     window.mainloop()
 
 
 # ==================================================================================================================== #
