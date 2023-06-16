@@ -106,10 +106,15 @@ def open_excel_file():
 
 # this will be used in the API
 def print_text():
-    global entry_4  # Use the global entry_3 variable
-    text = entry_4.get()
-    text = text.strip()  # Remove leading/trailing whitespace
-    print("Text:", text)
+    global entry_4, entry_2  # Use the global entry_4 and entry_2 variables
+    question = entry_4.get()
+    question = question.strip()  # Remove leading/trailing whitespace
+    if question:
+        answer = chat_with_gpt(question)
+
+        # Display the answer in entry_2
+        entry_2.delete(1.0, END)
+        entry_2.insert(END, answer)
 
 
 # this is the code to display item
@@ -149,18 +154,6 @@ def display_table(df):
     table.pack(fill="both", expand=True)
 
 
-# Function to handle the user's question and get the answer from the OpenAI API
-def get_answer():
-    global entry_4,entry_2  # Use the global entry_4 variable
-    question = entry_4.get()
-    question = question.strip()  # Remove leading/trailing whitespace
-
-    if question:
-        answer = chat_with_gpt(question)
-
-        # Display the answer in entry_2
-        entry_2.delete(1.0, END)
-        entry_2.insert(END, answer)
 
 
 # Function to call the ChatGPT API
@@ -175,7 +168,6 @@ def chat_with_gpt(prompt):
 
     answer = response.choices[0].message.content
     return answer
-
 
 # this is the code to display item
 def display_table(df):
@@ -219,7 +211,7 @@ def display_table(df):
     # Display the table
     table.pack(side="left", fill="both", expand=True)
 
-entry_4.bind("<Return>", lambda event: get_answer())
+entry_4.bind("<Return>", lambda event: print_text())
 
 
 
@@ -358,6 +350,21 @@ image_4 = canvas.create_image(
 def callin(df):
     df=df
     global entry_3, image_2, entry_4, entry_bg_1, image_5, image_6, image_4, entry_bg_2, entry_bg_4,image_7,image_8
+        # Clear entry_1
+    entry_1.delete(1.0, END)
+
+    # Convert DataFrame to CSV data
+    csv_data = df.to_csv(index=False)
+
+    # Display the initial response in entry_1
+    initial_response = chat_with_gpt(csv_data)
+    entry_1.insert(END, initial_response)
+
+    # Disable entry_1
+    entry_1.configure(state="disabled")
+
+    # Bind the "Return" key to the print_text() function
+    entry_4.bind("<Return>", lambda event: print_text())
     canvas = Canvas(
         window,
         bg="#222831",
