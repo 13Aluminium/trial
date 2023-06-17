@@ -519,6 +519,21 @@ def callin(df):
     button_7 = Button(canvas, image=image_image_7, command=print_text)
     button_7.place(x=977.0, y=445.0)
 
+
+    # Make all the buttons following way:
+
+    # image_image_7 = PhotoImage(file=relative_to_assets("image_7.png"))
+    # button_image_7 = Button(
+    #     window,
+    #     image=image_image_7,
+    #     bg="#222831",
+    #     bd=0,
+    #     activebackground="#222831",
+    #     command=print_text
+
+    # )
+    # button_image_7.place(x=920.0, y=420.0)
+
     image_image_8 = PhotoImage(
         file=relative_to_assets("image_8.png"))
     image_8 = canvas.create_image(
