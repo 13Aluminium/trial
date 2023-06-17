@@ -569,6 +569,11 @@ def callin(df):
         601.0,
         image=image_image_8
     )
+
+    # Make sure to change position of the following images:
+    # Image_7 : x=920.0, y=420.0
+    # Image_8 : x=930.0, y=580.0
+    
     display_table(df)
 
     window.resizable(False, False)
