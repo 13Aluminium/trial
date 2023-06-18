@@ -97,7 +97,7 @@ def print_text():
     text = entry_4.get()
     text = text.strip()  # Remove leading/trailing whitespace
     print("Text:", text)
-    if text =='how many live in Boston region':
+    if text =='how many live in boston region':
         entry_2.delete(1.0, END)
         entry_2.insert(END, 'Number of IDs in the Boston region: 10')
 
