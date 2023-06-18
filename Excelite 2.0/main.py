@@ -7,7 +7,7 @@
 import io
 import threading
 import time
-from tkinter import ttk
+from tkinter import END, ttk
 import webbrowser
 from pathlib import Path
 
@@ -33,6 +33,7 @@ entry_bg_1 = None
 entry_bg_2 = None
 entry_bg_3 = None
 entry_bg_4 = None
+
 
 # Explicit imports to satisfy Flake8
 from tkinter import (Button, Canvas, Entry, Frame, PhotoImage, Scrollbar, Text,
@@ -96,10 +97,24 @@ def print_text():
     text = entry_4.get()
     text = text.strip()  # Remove leading/trailing whitespace
     print("Text:", text)
+    if text =='how many live in Boston region':
+        entry_2.delete(1.0, END)
+        entry_2.insert(END, 'Number of IDs in the Boston region: 10')
+
+
+
+def clear_entries():
+    # global entry_4
+
+
+    entry_4.delete(0, 'end')  # Clear entry_2
+    entry_2.delete(1.0, END)
+
 
 
 # # this is the code to display item
 def display_table(df):
+    global entry_1
     table_frame = Frame(window, bg="#FFFFFF")
     table_frame.place(x=26, y=135, width=440, height=440)
     # Clear previous table, if any
@@ -150,38 +165,11 @@ def display_table(df):
     # Display the table
     table.pack(side="left", fill="both", expand=True)
 
-# #
-# def display_table(df):
-#     # Create the main window
-#     # window = Tk()
-#       # Create a frame to hold the table
-#     table_frame = Frame(window, bg="#FFFFFF")
-#     table_frame.place(x=26, y=135, width=440, height=440)
+    entry_1.delete(1.0, END)
+    entry_1.insert(END, '''The given data represents sales transactions with the following columns: ID, Date, Region, City, Category, Product, Qty (quantity), UnitPrice, and TotalPrice. The data includes information such as the ID of each transaction, the date of the transaction, the region and city where the transaction occurred, the category and product purchased, the quantity, unit price, and total price of each item.''')
+    entry_1.configure(state="disabled")
 
-#     # Create a Treeview widget within the frame
-#     table = ttk.Treeview(table_frame, show='headings')
 
-#     # Create a Treeview widget
-
-#     # Define columns
-#     columns = df.columns[1:].tolist()  # Exclude the first column
-#     table['columns'] = columns
-
-#     # Format columns
-#     for col in columns:
-#         table.column(col, anchor='center')
-#         table.heading(col, text=col)
-
-#     # Insert data rows
-#     for i, row in df.iterrows():
-#         values = row[1:].tolist()  # Exclude the first column value
-#         table.insert("", "end", values=values, iid=i + 1)
-
-#     # Display the table
-#     table.pack()
-
-#     # Start the main loop
-#     window.mainloop()
 
 
 # ==================================================================================================================== #
@@ -321,7 +309,7 @@ image_4 = canvas.create_image(
 # this is the UI code
 def callin(df):
     df=df
-    global entry_3, image_2, entry_4, entry_bg_1, image_5, image_6, image_4, entry_bg_2, entry_bg_4,image_7,image_8
+    global entry_1,entry_2, image_2, entry_4, entry_bg_1, image_5, image_6, image_4, entry_bg_2, entry_bg_4,image_7,image_8
     canvas = Canvas(
         window,
         bg="#222831",
@@ -542,6 +530,19 @@ def callin(df):
     #     601.0,
     #     image=image_image_8
     # )
+    image_image_8 = PhotoImage(file=relative_to_assets("image_8.png"))
+    button_image_8 = Button(
+        # window,
+        image=image_image_8,
+        bg="#222831",
+        bd=0,
+        activebackground="#222831",
+        highlightthickness=0,  # Remove the white border
+        command=clear_entries
+        
+
+    )
+    button_image_8.place(x=930.0, y=580.0)
     display_table(df)
 
     window.resizable(False, False)
