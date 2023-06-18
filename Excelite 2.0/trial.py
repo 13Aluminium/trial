@@ -7,6 +7,7 @@
 import io
 import threading
 import time
+from tkinter import ttk
 import webbrowser
 from pathlib import Path
 
@@ -117,43 +118,6 @@ def print_text():
         entry_2.insert(END, answer)
 
 
-# this is the code to display item
-def display_table(df):
-    table_frame = Frame(window, bg="#FFFFFF")
-    table_frame.place(x=26, y=135, width=440, height=440)
-    # Clear previous table, if any
-
-    if table_frame.winfo_children():
-        for child in table_frame.winfo_children():
-            child.destroy()
-
-    # Create a Treeview widget
-    table = Treeview(table_frame, show="headings")
-
-    # Extract the column names and data from the DataFrame
-    columns = df.columns.tolist()
-    data = df.values.tolist()
-
-    # Configure the Treeview columns and headings
-    table["columns"] = columns
-    for col in columns:
-        table.heading(col, text=col)
-
-    # Add the data to the Treeview
-    for row in data:
-        table.insert("", "end", values=row)
-
-    # Add scrollbars to the Treeview
-    scrollbar_x = Scrollbar(table_frame, orient="horizontal", command=table.xview)
-    scrollbar_y = Scrollbar(table_frame, orient="vertical", command=table.yview)
-    table.configure(xscrollcommand=scrollbar_x.set, yscrollcommand=scrollbar_y.set)
-    scrollbar_x.pack(side="bottom", fill="x")
-    scrollbar_y.pack(side="right", fill="y")
-
-    # Place the Treeview
-    table.pack(fill="both", expand=True)
-
-
 
 
 # Function to call the ChatGPT API
@@ -170,6 +134,8 @@ def chat_with_gpt(prompt):
     return answer
 
 # this is the code to display item
+
+# # this is the code to display item
 def display_table(df):
     table_frame = Frame(window, bg="#FFFFFF")
     table_frame.place(x=26, y=135, width=440, height=440)
@@ -179,8 +145,11 @@ def display_table(df):
         for child in table_frame.winfo_children():
             child.destroy()
 
+
+
     # Create a Treeview widget
-    table = Treeview(table_frame)
+    # table = Treeview(table_frame)
+    table = Treeview(table_frame, style="Custom.Treeview")
 
     # Create a horizontal scrollbar
     x_scrollbar = Scrollbar(table_frame, orient="horizontal")
@@ -198,8 +167,15 @@ def display_table(df):
     columns = df.columns.tolist()
     table['columns'] = columns
 
+        # Create a style for the table
+    style = ttk.Style()
+    style.configure("Custom.Treeview", background="#F0F0F0")
+    style.configure("Custom.Treeview.Heading", font=('Arial', 12, 'bold'), background="green", foreground="white")
+
+
     # Format columns
     for col in columns:
+        table.column("#0", width=0, stretch=False)  # Add this line
         table.column(col, anchor="center")
         table.heading(col, text=col)
 
@@ -349,7 +325,7 @@ image_4 = canvas.create_image(
 # this is the UI code
 def callin(df):
     df=df
-    global entry_3, image_2, entry_4, entry_bg_1, image_5, image_6, image_4, entry_bg_2, entry_bg_4,image_7,image_8
+    global entry_1,entry_3, image_2, entry_4, entry_bg_1, image_5, image_6, image_4, entry_bg_2, entry_bg_4,image_7,image_8
         # Clear entry_1
     entry_1.delete(1.0, END)
 
@@ -357,7 +333,7 @@ def callin(df):
     csv_data = df.to_csv(index=False)
 
     # Display the initial response in entry_1
-    initial_response = chat_with_gpt(csv_data)
+    initial_response = chat_with_gpt('give us this summary of this data in short in 50 words'+csv_data)
     entry_1.insert(END, initial_response)
 
     # Disable entry_1
